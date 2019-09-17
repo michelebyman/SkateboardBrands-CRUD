@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 2019_09_11_120334) do
   enable_extension "plpgsql"
 
   create_table "brands", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
-    t.boolean "favorite"
+    t.boolean "favorite", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -8,19 +8,20 @@
                     <th>Description</th>
                     <th>Favorite</th>
                 </tr>
+                
                 <tr :class="editing ? 'tableBrands' : 'hover'" v-for="brand in brands" :key="brand.id">
                     <td v-if="editing === brand.id">
-                        <input type="text" v-model="brand.name" />
+                        <input class="edit-inputfield" type="text" v-model="brand.name" />
                     </td>
                     <td v-else>{{brand.name}}</td>
 
                     <td v-if="editing === brand.id">
-                        <input type="text" v-model="brand.description" />
+                        <input class="edit-inputfield"  type="text" v-model="brand.description" />
                     </td>
                     <td v-else>{{brand.description}}</td>
 
                     <td v-if="editing === brand.id">
-                        <input type="text" v-model="brand.favorite" />
+                        <input class="edit-inputfield"  type="text" v-model="brand.favorite" />
                     </td>
                     <td v-else>{{!!brand.favorite}}</td>
 
@@ -32,7 +33,7 @@
                         <button class="btn" @click.prevent="updateBrand(brand)">Save</button>
                     </td>
                     <td v-else>
-                        <button class="btn del" @click="removeBrand(brand.id)">Delete</button>
+                        <button class="btn del" @click.prevent="removeBrand(brand.id)">Delete</button>
                         <button class="btn" @click.prevent="editMode(brand)">Edit</button>
                     </td>
                 </tr>

@@ -31,6 +31,8 @@ class BrandsController < ApplicationController
         format.html { redirect_to @brand, notice: 'Brand was successfully created.' }
         format.json { render :show, status: :created, location: @brand }
       else
+        ap 'here'
+        ap @brand.errors
         format.html { render :new }
         format.json { render json: @brand.errors, status: :unprocessable_entity }
       end

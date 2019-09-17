@@ -9,14 +9,13 @@ body {
 
 
 #app {
-
         font-family: 'Nunito', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         height: 100vh;
         width: 100vw;
         background: #2c3e50;
-        color: #cfd2d4;
+        color: #e9eaeb;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -67,7 +66,7 @@ body {
                 }
 
                 &.edit {
-                        background-color: #2980b9;
+                        background-color: #e74c3c;
                 }
 
         }
@@ -86,7 +85,7 @@ body {
 
                 .hover:not(:first-child):hover {
 
-                        color: #ecf0f1;
+                        color: #ffffff;
                 }
 
                 tr {
@@ -110,8 +109,22 @@ body {
                 }
         }
 
+       .edit-inputfield {
+                padding: 1rem;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                font-size: 1rem;
+              border-bottom: 0.1rem solid #11c5a1;
+              color: white;
+       }
+
 
 }
+
+ ::placeholder {
+         color: white;
+ }
 
 #modal {
         width: 100vw;
@@ -144,16 +157,26 @@ body {
         span {
                 margin: 1rem 0 0 1rem;
                 color: #ecf0f1;
+                
         }
 
         select {
                 margin-top: 0;
         }
 
-        button,
-        input {
+        button {
                 padding: 1rem;
                 border-radius: 0.3rem;
+                border: none;
+        }
+
+        input {
+                  padding: 1rem;
+                  border: none;
+                color: white;
+                background-color: transparent;
+                  border-bottom: 0.1rem solid #11c5a1;
+                outline: none;
         }
 
         button {
@@ -165,6 +188,10 @@ body {
                 border: none;
                  font-size: 1.2rem;
                  color:white;
+
+                 &:disabled {
+                         background: grey;
+                 }
                  
         }
 
@@ -186,9 +213,11 @@ body {
                 padding: 0;
         }
 
-
-
+        .favorite-wrapper {
+                margin-top: 1.5rem;
+        }
 
 }
+
 
 
