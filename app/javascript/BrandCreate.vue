@@ -2,26 +2,26 @@
     <div class="modalWrapper">
        <div :class="{error: validation.hasError('brand')}">
 
-      <input type="text"  placeholder="* New Brand" v-model="brand"/>
+      <input type="text"  :placeholder="t.modal.newBrand" v-model="brand"/>
       
       <div class="message">{{ validation.firstError('brand') }}</div>
     </div>
        <div :class="{error: validation.hasError('description')}">
 
-      <input type="text"  placeholder="* Description" v-model="description"/>
+      <input type="text"  :placeholder="t.modal.description" v-model="description"/>
       
       <div class="message">{{ validation.firstError('description') }}</div>
     </div>
         
         <div class="favorite-wrapper">
-            <span>Favorite:</span>
+            <span>{{t.modal.favorite}}</span>
             <input class="checkbox" v-model="favorite" type="checkbox" />
         </div>
       
-                <button  :disabled="hasErrors" class="btn-send" @click.prevent="postBrand">Send to Database</button>
+                <button  :disabled="hasErrors" class="btn-send" @click.prevent="postBrand">{{t.button.sendToDataBase}}</button>
     
       
-        <button class="btn-close" @click="$emit('closeModal', close)">Close</button>
+        <button class="btn-close" @click="$emit('closeModal', close)">{{t.button.close}}</button>
      
     </div>
 </template>
@@ -39,7 +39,8 @@ export default {
             favorite: false,
             close: false,
             newBrand: {},
-            hasErrors: true
+            hasErrors: true,
+            t: window.I18n,
         };
     },
     mounted() {

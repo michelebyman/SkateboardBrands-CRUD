@@ -29,23 +29,23 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+sv:
   description:
-    title: "Brands"
+    title: "Märken"
   button:
-    delete: "Delete"
-    edit: "Edit"
-    addNewBrand: "Add New Brand"
-    save: "Save"
-    cancelEdit: "Cancel edit"
-    sendToDataBase: 'Send to Database'
-    close: 'Close'
+    delete: "Radera"
+    edit: "Redigera"
+    addNewBrand: "Lägg till ett nytt märke"
+    save: "Spara"
+    cancelEdit: "Avbryt"
+    sendToDataBase: 'Skicka till databasen'
+    close: 'Stäng'
   table:
     title:
-      brand: "Brand"
-      description: "Description"
-      favorite: "Favorite"
+      brand: "Märke"
+      description: "Beskrivning"
+      favorite: "Favorit"
   modal: 
-    newBrand: 'New Brand'
-    description: 'Description'
-    favorite: 'Favorite'
+    newBrand: 'Nytt märke'
+    description: 'Beskrivning'
+    favorite: 'Favorit'

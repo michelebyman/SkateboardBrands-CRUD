@@ -1,12 +1,12 @@
 <template>
     <div id="app">
-        <h1 class="header"><span class="header-span">Skateboard | </span>Brands</h1>
+        <h1 class="header"><span class="header-span">Skateboard | </span>{{t.description.title}}</h1>
         <form action>
             <table id="skateBrands">
                 <tr>
-                    <th>Brand</th>
-                    <th>Description</th>
-                    <th>Favorite</th>
+                    <th>{{t.table.title.brand}}</th>
+                    <th>{{t.table.title.description}}</th>
+                    <th>{{t.table.title.favorite}}</th>
                 </tr>
                 
                 <tr :class="editing ? 'tableBrands' : 'hover'" v-for="brand in brands" :key="brand.id">
@@ -29,18 +29,18 @@
                         <button
                             class="btn edit"
                             @click.prevent="cancelEdit(brand)"
-                        >Cancel edit</button>
-                        <button class="btn" @click.prevent="updateBrand(brand)">Save</button>
+                        >{{t.button.cancelEdit}}</button>
+                        <button class="btn" @click.prevent="updateBrand(brand)">{{t.button.save}}</button>
                     </td>
                     <td v-else>
-                        <button class="btn del" @click.prevent="removeBrand(brand.id)">Delete</button>
-                        <button class="btn" @click.prevent="editMode(brand)">Edit</button>
+                        <button class="btn del" @click.prevent="removeBrand(brand.id)">{{t.button.delete}}</button>
+                        <button class="btn" @click.prevent="editMode(brand)">{{t.button.edit}}</button>
                     </td>
                 </tr>
             </table>
         </form>
 
-        <button class="btn addNewBrand" @click="showModal = !showModal">Add New Brand</button>
+        <button class="btn addNewBrand" @click="showModal = !showModal">{{t.button.addNewBrand}}</button>
 
         <div id="modal" v-show="showModal">
             <BrandCreate 
@@ -71,11 +71,14 @@ export default {
             name: "",
             description: "",
             favorite: "",
-            savedBrand: null
+            savedBrand: null,
+            //injected through a script file and gives us all access to translations
+            t: window.I18n,
         };
     },
     mounted() {
         this.getBrands();
+
     },
     methods: {
         updateBrandsList(newBrand) {
