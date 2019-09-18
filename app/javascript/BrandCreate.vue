@@ -87,11 +87,13 @@ export default {
                 }
             })
                 .then(res => {
+
+                        console.log(res.data.id);
                     this.newBrand = res.data;
                     this.sendBrand();
                     this.brand = "";
                     this.description = "";
-                    this.favorite = "";
+                    this.favorite = false;
                 })
                 .catch(err => {
                         console.log(err.response.data);

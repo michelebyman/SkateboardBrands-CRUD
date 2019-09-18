@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2019_09_11_120334) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description"
-    t.boolean "favorite", null: false
+    t.string "description", null: false
+    t.boolean "favorite", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

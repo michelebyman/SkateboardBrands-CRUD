@@ -12,11 +12,18 @@
                 <tr :class="editing ? 'tableBrands' : 'hover'" v-for="brand in brands" :key="brand.id">
                     <td v-if="editing === brand.id">
                         <input class="edit-inputfield" type="text" v-model="brand.name" />
+                        <div v-if="errors.name">
+                                  <p>Can't be blank</p>
+                        </div>
+                           
                     </td>
                     <td v-else>{{brand.name}}</td>
 
                     <td v-if="editing === brand.id">
                         <input class="edit-inputfield"  type="text" v-model="brand.description" />
+                       <div v-if="errors.description">
+                                  <p>Can't be blank</p>
+                        </div>
                     </td>
                     <td v-else>{{brand.description}}</td>
 
@@ -50,6 +57,8 @@
         </div>
 
 
+
+
         
     </div>
 </template>
@@ -69,11 +78,16 @@ export default {
             showModal: false,
             editing: null,
             name: "",
-            description: "",
+            description: null,
             favorite: "",
             savedBrand: null,
             //injected through a script file and gives us all access to translations
-            t: window.I18n,
+            t: I18n,
+
+            errors: {
+                    name: '',
+                    description: ''
+            }
         };
     },
     mounted() {
@@ -103,9 +117,8 @@ export default {
         },
 
         removeBrand(id) {
+                //token to access the database
             const meta = document.querySelector('meta[name="csrf-token"]');
-
-            
             Axios.delete("/brands/" + id, {
                 headers: {
                     method: "DELETE",
@@ -115,7 +128,6 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log(res.data);
                                 this.brands = this.brands.filter(brand => brand.id !== id);
 
                 })
@@ -158,10 +170,15 @@ export default {
                 //     updatedBrand.name = res.data.name;
                 //     updatedBrand.description = res.data.description;
                 //     updatedBrand.favorite = res.data.favorite;
+               
+                
                     this.editing = false;
                 })
                 .catch(err => {
-                    console.error(err);
+                    console.error(err.response.data);
+
+                    this.errors.name = err.response.data.name;
+                    this.errors.description = err.response.data.description;
                 });
         }
     }

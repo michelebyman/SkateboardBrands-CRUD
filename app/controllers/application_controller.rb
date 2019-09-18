@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
 
         def set_js_translations
                 ap 'GET TRANS'
-        @translations = I18n.t(".")
-                        ap @translations
+                @translations = I18n.t(".")
+                ap @translations
 
         end
 
