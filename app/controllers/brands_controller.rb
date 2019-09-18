@@ -63,6 +63,28 @@ class BrandsController < ApplicationController
     end
   end
 
+  def upload_image
+            @brands = Brand.all
+            ap 'brands'
+            ap @brands
+  end
+
+  def upload_image_upload
+        brand_id = params[:id]
+        brand = Brand.find(brand_id)
+
+        ap 'mybrand'
+        ap brand
+
+        brand.photo = brand_params[:photo]
+        brand.save
+
+        ap 'mybrand after save'
+        ap brand
+        #ap brand_params
+        #ap params['photo']
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_brand
@@ -71,6 +93,8 @@ class BrandsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def brand_params
-      params.require(:brand).permit(:name, :description, :favorite)
+      params.require(:brand).permit(:name, :description, :favorite, :avatar)
+
+   
     end
 end

@@ -1,0 +1,20 @@
+<ul>
+        <% @brands.each do |brand| %>
+                <li>
+                        <%= brand.name %>
+                        <%= brand.description %>
+                        <%= brand.favorite %>
+                                <%= image_tag brand.avatar.variant(resize: "50x50") %>
+
+                        <%= form_for :brand, url: "/brands/#{brand.id}", method: :patch do |b| %>
+                                Avatar: <%= b.file_field :avatar, accept: 'image/png,image/jpeg'%>
+                                <%= b.submit 'Ladda upp bild' %>
+                        <% end %>
+
+                </li> 
+        <% end %>
+
+</ul>
+
+
+     
