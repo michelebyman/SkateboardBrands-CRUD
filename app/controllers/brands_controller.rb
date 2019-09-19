@@ -5,10 +5,10 @@ class BrandsController < ApplicationController
   # GET /brands.json
   def index
  @brands = Brand.all.with_attached_avatar
-    @brands = @brands.map { |brand| 
+    @brands = @brands.map { |brand|
         brand.attributes.merge(
-                { 
-                    avatar_image: polymorphic_url(brand.avatar) 
+                {
+                    avatar_image: polymorphic_url(brand.avatar)
                 }
             )
         .symbolize_keys
@@ -40,8 +40,8 @@ class BrandsController < ApplicationController
       if @brand.save
         format.html { redirect_to @brand, notice: 'Brand was successfully created.' }
         format.json { render :show, status: :created, location: @brand }
-           @brand = @brand.attributes.merge({ 
-                    avatar_image: polymorphic_url(@brand.avatar) 
+           @brand = @brand.attributes.merge({
+                    avatar_image: polymorphic_url(@brand.avatar)
                 }).symbolize_keys
       else
         ap 'here'
@@ -59,8 +59,8 @@ class BrandsController < ApplicationController
       if @brand.update(brand_params)
         format.html { redirect_to @brand, notice: 'Brand was successfully updated.' }
         format.json { render :show, status: :ok, location: @brand }
-         @brand = @brand.attributes.merge({ 
-                    avatar_image: polymorphic_url(@brand.avatar) 
+         @brand = @brand.attributes.merge({
+                    avatar_image: polymorphic_url(@brand.avatar)
                 }).symbolize_keys
       else
         format.html { render :edit }
@@ -85,7 +85,21 @@ class BrandsController < ApplicationController
             ap @brands
   end
 
- 
+  def upload_image_upload
+        brand_id = params[:id]
+        brand = Brand.find(brand_id)
+
+        ap 'mybrand'
+        ap brand
+
+        brand.photo = brand_params[:photo]
+        brand.save
+
+        ap 'mybrand after save'
+        ap brand
+        #ap brand_params
+        #ap params['photo']
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -97,6 +111,6 @@ class BrandsController < ApplicationController
     def brand_params
       params.require(:brand).permit(:name, :description, :favorite, :avatar)
 
-   
+
     end
 end

@@ -7,17 +7,16 @@
                         <%#if brand.avatar.attached? %>
                          <%=  image_tag brand.avatar.variant(resize: "100x100") %>
                          <%# else %>
-                          
+
                         <%# end %>
                         <%= form_for :brand, url: "/brands/#{brand.id}", method: :patch do |b| %>
                          Avatar: <%= b.file_field :avatar, required:true, accept: 'image/png,image/jpeg'%>
                         <%= b.submit 'Ladda upp bild' %>
                         <% end %>
 
-                </li> 
+                </li>
         <% end %>
 
 </ul>
 
 
-     
