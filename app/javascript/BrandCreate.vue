@@ -1,5 +1,6 @@
 <template>
     <div class="modalWrapper">
+          
        <div :class="{error: validation.hasError('brand')}">
 
       <input type="text"  :placeholder="t.modal.newBrand" v-model="brand"/>
