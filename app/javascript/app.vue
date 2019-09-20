@@ -1,62 +1,69 @@
 <template>
   <div id="app">
-    <h1 class="header">
-      <span class="header-span">Skateboard |</span>
-      {{t.description.title}}
-    </h1>
-    <form action>
-      <table id="skateBrands">
-        <tr>
-          <th></th>
-          <th>{{t.table.title.brand}}</th>
-          <th>{{t.table.title.description}}</th>
-          <th>{{t.table.title.favorite}}</th>
-        </tr>
+    <div class="brand_logo_wrapper">
+      <h1 class="brand_logo_wrapper_header">
+        <span class="brand_logo_wrapper_header-span">Skateboard |</span>
+        {{t.description.title}}
+      </h1>
+    </div>
+    <div class="brand_card_wrapper_grid">
+      <div v-for="brand in brands" :key="brand.id">
+        <div class="brand_card_wrapper">
+          <div>
+            <img class="brand_card_wrapper-image" :src="brand.avatar_image" />
+          </div>
 
-        <tr :class="editing ? 'tableBrands' : 'hover'" v-for="brand in brands" :key="brand.id">
-          <td>
-            <img class="brand_image" :src="brand.avatar_image" alt />
-          </td>
-
-          <td v-if="editing === brand.id">
+          <div v-if="editing === brand.id">
             <input class="edit-inputfield" type="text" v-model="brand.name" />
             <div v-if="errors.name">
               <p>Can't be blank</p>
             </div>
-          </td>
-          <td v-else>{{brand.name}}</td>
+          </div>
+          <div class="brand_card_wrapper-name" v-else>
+            {{t.table.title.brand}} |
+            <span class="brand_name">{{brand.name}}</span>
+          </div>
 
-          <td v-if="editing === brand.id">
+          <div v-if="editing === brand.id">
             <input class="edit-inputfield" type="text" v-model="brand.description" />
             <div v-if="errors.description">
               <p>Can't be blank</p>
             </div>
-          </td>
-          <td v-else>{{brand.description}}</td>
+          </div>
+          <div class="brand_card_wrapper-description" v-else>
+            {{t.table.title.description}} |
+            <span class="brand_name">{{brand.description}}</span>
+          </div>
 
-          <td v-if="editing === brand.id">
+          <div v-if="editing === brand.id">
             <input class="edit-inputfield" type="text" v-model="brand.favorite" />
-          </td>
-          <td v-else>{{!!brand.favorite}}</td>
+          </div>
+          <div class="brand_card_wrapper-favorite" v-else>
+            {{t.table.title.favorite}} |
+            <span class="brand_name">{{ brand.favorite ? 'YES' : 'NO' }}</span>
+          </div>
 
-          <td v-if="editing === brand.id">
-            <button class="btn edit" @click.prevent="cancelEdit(brand)">{{t.button.cancelEdit}}</button>
+          <div class="brand_card_wrapper_buttons" v-if="editing === brand.id">
             <button class="btn" @click.prevent="updateBrand(brand)">{{t.button.save}}</button>
-          </td>
 
-          <td v-else>
+            <button class="btn edit" @click.prevent="cancelEdit(brand)">{{t.button.cancelEdit}}</button>
+
             <button class="btn del" @click.prevent="removeBrand(brand.id)">{{t.button.delete}}</button>
+          </div>
+
+          <div class="brand_card_wrapper_buttons" v-else>
             <button class="btn" @click.prevent="editMode(brand)">{{t.button.edit}}</button>
-          </td>
-        </tr>
-      </table>
-    </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <button class="btn addNewBrand" @click="showModal = !showModal">{{t.button.addNewBrand}}</button>
 
     <div id="modal" v-show="showModal">
       <BrandCreate @closeModal="updateShowModal" @newBrand="updateBrandsList($event)"></BrandCreate>
     </div>
+    <div class="brands_wrapper"></div>
   </div>
 </template>
 
@@ -68,7 +75,7 @@ export default {
   components: {
     BrandCreate
   },
-  data: function() {
+  data: function () {
     return {
       brands: [],
       showModal: false,
@@ -78,7 +85,7 @@ export default {
       favorite: "",
       savedBrand: null,
       //injected through a script file and gives us all access to translations
-      t: I18n,
+      t: window.I18n,
 
       errors: {
         name: "",
@@ -164,7 +171,7 @@ export default {
           //     updatedBrand.name = res.data.name;
           //     updatedBrand.description = res.data.description;
           //     updatedBrand.favorite = res.data.favorite;
-                
+
           this.editing = false;
         })
         .catch(err => {

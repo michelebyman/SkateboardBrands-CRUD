@@ -1,29 +1,31 @@
 <template>
     <div class="modalWrapper">
-          
+
        <div :class="{error: validation.hasError('brand')}">
 
       <input type="text"  :placeholder="t.modal.newBrand" v-model="brand"/>
-      
+
       <div class="message">{{ validation.firstError('brand') }}</div>
     </div>
        <div :class="{error: validation.hasError('description')}">
 
       <input type="text"  :placeholder="t.modal.description" v-model="description"/>
-      
+
       <div class="message">{{ validation.firstError('description') }}</div>
     </div>
-        
+
+
+
         <div class="favorite-wrapper">
             <span>{{t.modal.favorite}}</span>
             <input class="checkbox" v-model="favorite" type="checkbox" />
         </div>
-      
+
                 <button  :disabled="hasErrors" class="btn-send" @click.prevent="postBrand">{{t.button.sendToDataBase}}</button>
-    
-      
+
+
         <button class="btn-close" @click="$emit('closeModal', close)">{{t.button.close}}</button>
-     
+
     </div>
 </template>
 
@@ -41,7 +43,8 @@ export default {
             close: false,
             newBrand: {},
             hasErrors: true,
-            t: window.I18n,
+						t: window.I18n,
+
         };
     },
     mounted() {
@@ -50,14 +53,14 @@ export default {
     validators: {
       brand: (value)=> {
         return Validator.value(value).required().lengthBetween(1,15)
-     
+
       },
       description: function (value) {
         return Validator.value(value).required().lengthBetween(2,25);
       },
     },
 
-    watch: {    
+    watch: {
             'validation.errors': function(val) {
                     if (val.length == 0) {
                             this.hasErrors = false
@@ -107,4 +110,3 @@ export default {
 
 
 
-               
